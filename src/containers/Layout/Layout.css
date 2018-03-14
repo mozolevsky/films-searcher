@@ -1,0 +1,24 @@
+@media (min-width: 320px) {
+    .Container {
+        margin: 30px 15px;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+@media (min-width: 576px) {
+    .Container {
+        margin: 30px 25px;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3vw;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .Container {
+        width: 1140px;
+        margin: 40px auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px;
+    }
+}

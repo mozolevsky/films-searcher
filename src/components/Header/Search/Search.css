@@ -1,0 +1,20 @@
+@media (min-width: 320px) {
+    .Input {
+        width: 200px;
+        height: 36px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        color: rgba(0, 0, 0, 0.4);
+        border: none;
+    }
+
+    .Form {
+        display: flex;
+    }
+}
+
+@media (min-width: 576px) {
+    .Input {
+        width: 400px;
+    }
+}

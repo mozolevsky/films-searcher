@@ -1,0 +1,20 @@
+.TitleBlock {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.Title {
+    margin: 0;
+    margin-right: 15px;
+    font-size: 2rem;
+    line-height: 1;
+    color: #212121;
+}
+
+.Date {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: #424242;
+}
