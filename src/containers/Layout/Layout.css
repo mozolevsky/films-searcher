@@ -13,12 +13,16 @@
     }
 }
 
+@media (min-width: 992px) {
+    .Container {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 30px;
+    }
+}
 
 @media (min-width: 1200px) {
     .Container {
         width: 1140px;
         margin: 40px auto;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 30px;
     }
 }

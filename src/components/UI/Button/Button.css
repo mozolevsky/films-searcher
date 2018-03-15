@@ -4,3 +4,7 @@
     height: 36px;
     background-color: #fff;
 }
+
+.Button:hover {
+    cursor: pointer;
+}

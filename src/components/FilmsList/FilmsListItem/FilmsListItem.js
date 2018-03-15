@@ -5,10 +5,11 @@ import classes from './FilmsListItem.css';
 const filmsListItem = props => {
     return (
         <section>
-            <Title filmName="Seven" year="1997"/>
+            <Title filmName={props.title} year={props.year}/>
             <img
             className={classes.Img}
-            src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTc5MDY1MjU5MF5BMl5BanBnXkFtZTgwNDM2OTE4MzE@._V1_SX300.jpg" alt="" />
+            src={props.poster}
+            alt={`Movie ${props.title} poster`} />
         </section>
     )
 }
