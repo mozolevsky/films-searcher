@@ -4,7 +4,7 @@ import classes from './FilmsListItem.css';
 
 const filmsListItem = props => {
     return (
-        <section>
+        <section className={classes.FilmListItem}>
             <Title filmName={props.title} year={props.year}/>
             <img
             className={classes.Img}
