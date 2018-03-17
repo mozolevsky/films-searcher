@@ -4,6 +4,11 @@
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .NotFound {
+        text-align: center;
+        margin-top: 20px;
+    }
 }
 @media (min-width: 576px) {
     .Container {

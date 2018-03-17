@@ -17,9 +17,13 @@ class Search extends PureComponent {
 
     searchHandler = (e) => {
         e.preventDefault();
+
+        this.props.toSwitchLoader();
         
         axios.get(`http://www.omdbapi.com/?apikey=50239c46&s=${this.state.searchString}`)
         .then((response) => {
+            
+            this.props.toSwitchLoader();
             this.props.addToStore(response.data.Search);
         })
         .catch(function (error) {
@@ -41,6 +45,7 @@ class Search extends PureComponent {
                         className={classes.Input}
                         type="text"
                         name="filmSearchString"
+                        autoComplete="off"
                         value={this.state.searchString}
                         ref={(input) => { this.filmSearchString = input; }}
                         onChange={this.handleChangeSearchInput} 
@@ -57,6 +62,7 @@ class Search extends PureComponent {
 const mapDispatchToProps = dispatch => {
     return {
         addToStore: (data) => dispatch({type: actionType.ADD_FILMS, filmsData: data}),
+        toSwitchLoader: () => dispatch({type: actionType.SWITCH_LOADER})
     }
 }
 
