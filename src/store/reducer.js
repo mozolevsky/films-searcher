@@ -3,7 +3,8 @@ import * as actionType from './actions';
 const initialState = {
     filmsData: [],
     notFound: false,
-    activeLoader: false
+    activeLoader: false,
+    currentFilmId: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +38,13 @@ const reducer = (state = initialState, action) => {
         return {
             ...state, 
             activeLoader: !state.activeLoader
+        }
+    }
+
+    if (action.type === actionType.SET_CURRENT_FILM_ID) {
+        return {
+            ...state,
+            currentFilmId: action.currentFilmId
         }
     }
 

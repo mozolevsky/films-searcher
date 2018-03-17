@@ -5,6 +5,7 @@ import searchIcon from '../../images/search-icon.svg';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionType from '../../store/actions';
+import { withRouter } from 'react-router-dom';
 
 class Search extends PureComponent {
     state = {
@@ -18,6 +19,7 @@ class Search extends PureComponent {
     searchHandler = (e) => {
         e.preventDefault();
 
+        this.props.history.replace('/');
         this.props.toSwitchLoader();
         
         axios.get(`http://www.omdbapi.com/?apikey=50239c46&s=${this.state.searchString}`)
@@ -66,4 +68,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Search);
+export default withRouter(connect(null, mapDispatchToProps)(Search));

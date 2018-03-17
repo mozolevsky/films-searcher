@@ -1,2 +1,3 @@
 export const ADD_FILMS = 'ADD_FILMS';
 export const SWITCH_LOADER = 'SWITCH_LOADER';
+export const SET_CURRENT_FILM_ID = 'SET_CURRENT_FILM_ID';

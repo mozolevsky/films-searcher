@@ -1,0 +1,16 @@
+.InfoMessage {
+    text-align: center;
+    font-size: 16px;
+}
+
+.Danger {
+    color: #F44336;
+}
+
+.Warning {
+    color: #FFC107;
+}
+
+.Success {
+    color: #4CAF50;
+}

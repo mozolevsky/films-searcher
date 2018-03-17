@@ -1,18 +1,16 @@
 import React, { PureComponent, Fragment } from 'react';
 import Header from '../../components/Header/Header';
 import Search from '../Search/Search';
-import FilmsList from '../../components/FilmsList/FilmsList';
+import FilmsList from '../FilmsList/FilmsList';
 import { connect } from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Layout.css';
+import { Route, Switch, withRouter} from 'react-router-dom';
+import InfoMessage from '../../components/UI/InfoMessage/InfoMessage';
+import FilmCard from '../FilmCard/FilmCard';
 
 
 class Layout extends PureComponent {
-
-    componentDidUpdate() {
-        console.log('[Layout]: props updated');
-    }
-
     render() {
         let filmsArea = <FilmsList films={this.props.films}/>;
 
@@ -21,7 +19,7 @@ class Layout extends PureComponent {
         }
 
         if (this.props.notFound) {
-            filmsArea = <h3 className={classes.NotFound}>Not found :( Please try again</h3>
+            filmsArea = <InfoMessage type="Warning">Films weren't found :( Please try again</InfoMessage>
         }
 
         return (
@@ -30,7 +28,11 @@ class Layout extends PureComponent {
                     <Search/>
                 </Header>
                 <main className={classes.Container}>
-                    {filmsArea}
+                    <Switch>
+                        <Route exact path="/" render={() => filmsArea} />
+                        <Route path="/movie/:id" component={FilmCard}/>
+                        <Route render={() => <InfoMessage type="Danger">Page wasn't found</InfoMessage>} />
+                    </Switch>
                 </main>
             </Fragment>
         )
@@ -45,4 +47,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Layout);
+export default withRouter(connect(mapStateToProps)(Layout));

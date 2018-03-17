@@ -1,0 +1,19 @@
+@media (min-width: 320px) {
+    .FilmsGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+@media (min-width: 576px) {
+    .FilmsGrid {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3vw;
+    }
+}
+
+@media (min-width: 992px) {
+    .FilmsGrid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 30px;
+    }
+}
