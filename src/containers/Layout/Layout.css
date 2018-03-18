@@ -1,6 +1,6 @@
 @media (min-width: 320px) {
     .Container {
-        margin: 30px 15px;
+        margin: 80px 15px 30px 15px;
     }
 
     .BackBtnWrapper {
@@ -12,13 +12,13 @@
 
 @media (min-width: 576px) {
     .Container {
-        margin: 30px 25px;
+        margin: 80px 25px 30px 25px;
     }
 }
 
 @media (min-width: 1200px) {
     .Container {
         width: 1140px;
-        margin: 40px auto;
+        margin: 80px auto 40px;
     }
 }

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import * as actionType from '../../store/actions';
+import * as actionCreators from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { withRouter } from 'react-router-dom';
 import classes from './FilmCard.css';
@@ -74,8 +74,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        toSwitchLoader: () => dispatch({type: actionType.SWITCH_LOADER}),
-        toSetCurrentFilmData: (filmData) => dispatch({type: actionType.SET_CURRENT_FILM_DATA, currentFilmData: filmData})
+        toSwitchLoader: () => dispatch(actionCreators.switchLoader()),
+        toSetCurrentFilmData: (filmData) => dispatch(actionCreators.setCurrentFilmData(filmData))
     }
 }
                 

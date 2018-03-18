@@ -1,10 +1,9 @@
-import * as actionType from './actions';
+import * as actionCreators from './actions';
 
 const initialState = {
     filmsData: [],
     notFound: false,
     activeLoader: false,
-    currentFilmId: null,
     currentFilmData: {
         Title: '',
         Poster: '',
@@ -17,59 +16,57 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    if (action.type === actionType.ADD_FILMS) {
+    switch(action.type) {
+        case actionCreators.ADD_FILMS:
+            if (!action.filmsData) {
+                return {
+                    ...state,
+                    currentFilmData: {
+                        ...state.currentFilmData
+                    },
+                    filmsData: [],
+                    notFound: true
+                }
+            }
 
-        if (!action.filmsData) {
+            let newFilmsData = action.filmsData.map(film => {
+                return {
+                    year: film.Year,
+                    poster: film.Poster,
+                    title: film.Title,
+                    id: film.imdbID
+                }
+            });
+
             return {
                 ...state,
                 currentFilmData: {
                     ...state.currentFilmData
                 },
-                filmsData: [],
-                notFound: true
+                filmsData: newFilmsData,
+                notFound: false
             }
-        }
-
-        let newFilmsData = action.filmsData.map(film => {
+        case actionCreators.SWITCH_LOADER: 
             return {
-                year: film.Year,
-                poster: film.Poster,
-                title: film.Title,
-                id: film.imdbID
+                ...state,
+                currentFilmData: {
+                    ...state.currentFilmData
+                },
+                activeLoader: !state.activeLoader
             }
-        });
-
-        return {
-            ...state,
-            currentFilmData: {
-                ...state.currentFilmData
-            },
-            filmsData: newFilmsData,
-            notFound: false
-        }
+        case actionCreators.SET_CURRENT_FILM_DATA:
+            return {
+                ...state,
+                currentFilmData: {
+                    ...action.currentFilmData
+                }
+            }
+        default:
+            return state;
     }
-
-    if (action.type === actionType.SWITCH_LOADER) {
-        return {
-            ...state,
-            currentFilmData: {
-                ...state.currentFilmData
-            },
-            activeLoader: !state.activeLoader
-        }
-    }
-
-    if (action.type === actionType.SET_CURRENT_FILM_DATA) {
-        return {
-            ...state,
-            currentFilmData: {
-                ...action.currentFilmData
-            },
-            currentFilmId: action.currentFilmId
-        }
-    }
-
-    return state;
 }
 
 export default reducer;
+
+
+
