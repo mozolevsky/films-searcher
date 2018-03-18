@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from '../UI/Title/Title';
+import Title from '../../UI/Title/Title';
 import classes from './FilmsListItem.css';
 
 const filmsListItem = props => {

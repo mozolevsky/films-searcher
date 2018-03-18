@@ -2,9 +2,13 @@
     border: none;
     min-width: 36px;
     height: 36px;
-    background-color: #fff;
+    background: transparent;
 }
 
 .Button:hover {
     cursor: pointer;
+}
+
+.White {
+    background-color: #fff;
 }

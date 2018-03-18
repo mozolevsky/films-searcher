@@ -3,33 +3,57 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionType from '../../store/actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { withRouter } from 'react-router-dom';
+import classes from './FilmCard.css';
 
 class FilmPage extends PureComponent {
-    state = {
-        currentFilmDetails: null
-    }
 
     componentDidMount() {
         this.props.toSwitchLoader();
+        const id = this.props.match.params.id;
 
-        axios.get(`http://www.omdbapi.com/?apikey=50239c46&i=${this.props.filmId}`)
+        axios.get(`http://www.omdbapi.com/?apikey=50239c46&i=${id}`)
         .then((response) => {
             
             this.props.toSwitchLoader();
-            this.setState({
-                currentFilmDetails: response.data
-            });
+            this.props.toSetCurrentFilmData(response.data);
         })
         .catch(function (error) {
             console.log(error);
+            this.props.toSwitchLoader();
         });
     }
 
     render() {
         let pageContent = <Spinner/>
+        const imgPlaceholder = 'http://via.placeholder.com/600x800';
+        const {
+            Title,
+            Poster,
+            Type,
+            Genre,
+            imdbRating,
+            Year,
+            Writer,
+            Plot
+        } = this.props.filmDetails;
 
         if (!this.props.loader) {
-            pageContent = <p>{this.props.filmId}</p>
+
+            pageContent = (
+                <section className={classes.FilmCard}>
+                    <h2 className={classes.Title}>{Title}</h2>
+                    <img className={classes.Img} src={Poster || imgPlaceholder} alt={`The poster for ${Title} film`} />
+                    <section className={classes.Content}>
+                        <p>Type: {Type}</p>
+                        <p>Genre: {Genre}</p>
+                        <p>Raiting: {imdbRating}</p>
+                        <p>Year: {Year}</p>
+                        <p>Writer: {Writer}</p>
+                        <p>Plot: {Plot}</p>
+                    </section>
+                </section>
+            )
         }
 
         return (
@@ -43,14 +67,16 @@ class FilmPage extends PureComponent {
 const mapStateToProps = state => {
     return {
         filmId: state.currentFilmId,
-        loader: state.activeLoader
+        loader: state.activeLoader,
+        filmDetails: state.currentFilmData
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        toSwitchLoader: () => dispatch({type: actionType.SWITCH_LOADER})
+        toSwitchLoader: () => dispatch({type: actionType.SWITCH_LOADER}),
+        toSetCurrentFilmData: (filmData) => dispatch({type: actionType.SET_CURRENT_FILM_DATA, currentFilmData: filmData})
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);
+                
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FilmPage));

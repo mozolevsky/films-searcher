@@ -3,6 +3,10 @@
         display: grid;
         grid-template-columns: 1fr;
     }
+
+    .Link {
+        text-decoration: none;
+    }
 }
 @media (min-width: 576px) {
     .FilmsGrid {

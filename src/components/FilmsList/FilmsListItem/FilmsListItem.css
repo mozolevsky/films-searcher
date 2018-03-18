@@ -7,6 +7,8 @@
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
     padding: 10px;
     background: #fff;
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);

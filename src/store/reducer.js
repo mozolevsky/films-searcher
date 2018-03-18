@@ -4,7 +4,16 @@ const initialState = {
     filmsData: [],
     notFound: false,
     activeLoader: false,
-    currentFilmId: null
+    currentFilmId: null,
+    currentFilmData: {
+        Title: '',
+        Poster: '',
+        Type: '',
+        Genre: '',
+        imdbRating: '',
+        Year: '',
+        Writer: ''
+    }
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +22,9 @@ const reducer = (state = initialState, action) => {
         if (!action.filmsData) {
             return {
                 ...state,
+                currentFilmData: {
+                    ...state.currentFilmData
+                },
                 filmsData: [],
                 notFound: true
             }
@@ -29,6 +41,9 @@ const reducer = (state = initialState, action) => {
 
         return {
             ...state,
+            currentFilmData: {
+                ...state.currentFilmData
+            },
             filmsData: newFilmsData,
             notFound: false
         }
@@ -36,14 +51,20 @@ const reducer = (state = initialState, action) => {
 
     if (action.type === actionType.SWITCH_LOADER) {
         return {
-            ...state, 
+            ...state,
+            currentFilmData: {
+                ...state.currentFilmData
+            },
             activeLoader: !state.activeLoader
         }
     }
 
-    if (action.type === actionType.SET_CURRENT_FILM_ID) {
+    if (action.type === actionType.SET_CURRENT_FILM_DATA) {
         return {
             ...state,
+            currentFilmData: {
+                ...action.currentFilmData
+            },
             currentFilmId: action.currentFilmId
         }
     }

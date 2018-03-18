@@ -27,9 +27,13 @@ class Search extends PureComponent {
             
             this.props.toSwitchLoader();
             this.props.addToStore(response.data.Search);
+            this.setState({
+                searchString: ''
+            });
         })
         .catch(function (error) {
             console.log(error);
+            this.props.toSwitchLoader();
         });
     }
 
@@ -48,12 +52,13 @@ class Search extends PureComponent {
                         type="text"
                         name="filmSearchString"
                         autoComplete="off"
+                        placeholder="What we'll look for?"
                         value={this.state.searchString}
                         ref={(input) => { this.filmSearchString = input; }}
                         onChange={this.handleChangeSearchInput} 
                     />
                 </label>
-                <Button>
+                <Button fill="White">
                     <img src={searchIcon} width="16" height="16" alt="search icon"/>
                 </Button>
             </form>

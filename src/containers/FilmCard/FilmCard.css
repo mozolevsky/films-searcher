@@ -1,0 +1,55 @@
+@media (min-width: 320px) {
+    .Title {
+        grid-area: title;
+        margin: 0;
+    }
+
+    .Img {
+        grid-area: image;
+        width: 100%;
+    }
+
+    .Content {
+        grid-area: description;
+    }
+
+    .Content > p {
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
+
+    .FilmCard {
+        display: grid;
+        grid-gap: 1em;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "title"
+        "image"
+        "description"
+    }
+}
+@media (min-width: 576px) {
+    .Content > p {
+        font-size: 1rem;
+    }
+
+    .FilmCard {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas:
+        "title title title"
+        "image description description"
+    }
+}
+
+@media (min-width: 992px) {
+    .Content > p {
+        font-size: 1.4rem;
+    }
+
+    .FilmCard {
+        grid-template-columns: 1fr, 2fr;
+        grid-template-areas:
+        "title title"
+        "image description description"
+    }
+}
