@@ -1,6 +1,7 @@
 import * as actionCreators from './actions';
 
 const initialState = {
+    searchString: '',
     filmsData: [],
     notFound: false,
     activeLoader: false,
@@ -60,6 +61,14 @@ const reducer = (state = initialState, action) => {
                 currentFilmData: {
                     ...action.currentFilmData
                 }
+            }
+        case actionCreators.SET_SEARCH_STRING:
+            return {
+                ...state,
+                currentFilmData: {
+                    ...action.currentFilmData
+                },
+                searchString: action.searchString
             }
         default:
             return state;

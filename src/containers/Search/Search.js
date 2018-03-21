@@ -6,12 +6,9 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions';
 import { withRouter } from 'react-router-dom';
+import staticData from '../../staticData';
 
 class Search extends PureComponent {
-    state = {
-        searchString: ''
-    }
-
     componentDidMount() {
         this.filmSearchString.focus();
     }
@@ -22,14 +19,12 @@ class Search extends PureComponent {
         this.props.history.replace('/');
         this.props.toSwitchLoader();
         
-        axios.get(`http://www.omdbapi.com/?apikey=50239c46&s=${this.state.searchString}`)
+        axios.get(`http://www.omdbapi.com/?apikey=50239c46&s=${this.props.searchString}`)
         .then((response) => {
-            
             this.props.toSwitchLoader();
             this.props.addToStore(response.data.Search);
-            this.setState({
-                searchString: ''
-            });
+            
+            this.props.history.push(`/?search=${this.props.searchString}&page=1`);
         })
         .catch(function (error) {
             console.log(error);
@@ -41,6 +36,8 @@ class Search extends PureComponent {
         this.setState({
             searchString: e.target.value
         });
+
+        this.props.saveSearchString(e.target.value);
     }
 
     render() {
@@ -52,8 +49,8 @@ class Search extends PureComponent {
                         type="text"
                         name="filmSearchString"
                         autoComplete="off"
-                        placeholder="What we'll look for?"
-                        value={this.state.searchString}
+                        placeholder={staticData.searchPlaceholder}
+                        value={this.props.searchString}
                         ref={(input) => { this.filmSearchString = input; }}
                         onChange={this.handleChangeSearchInput} 
                     />
@@ -66,11 +63,18 @@ class Search extends PureComponent {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        addToStore: (data) => dispatch(actionCreators.addFilms(data)),
-        toSwitchLoader: () => dispatch(actionCreators.switchLoader())
+        searchString: state.searchString
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Search));
+const mapDispatchToProps = dispatch => {
+    return {
+        addToStore: (data) => dispatch(actionCreators.addFilms(data)),
+        toSwitchLoader: () => dispatch(actionCreators.switchLoader()),
+        saveSearchString: (string) => dispatch(actionCreators.setSearchString(string))
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

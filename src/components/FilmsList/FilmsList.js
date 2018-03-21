@@ -1,31 +1,53 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import FilmListItem from './FilmsListItem/FilmsListItem';
 import { Link } from 'react-router-dom';
+import InfoMessage from '../UI/InfoMessage/InfoMessage';
+import Spinner from '../UI/Spinner/Spinner';
+import staticData from '../../staticData';
 import classes from './FilmsList.css';
 
 
 const filmsList = props => {
-    return (
-        <section className={classes.FilmsGrid}>
-            {
-                props.films.map(film => {
-                    return (
+    let filmsArea = <InfoMessage>{staticData.filmsListEmpty}</InfoMessage>;
+
+    if (!!props.films.length) {
+        filmsArea = (
+            <section className={classes.FilmsGrid}>
+                {
+                    props.films.map(film => (
                         <Link 
                             to={`/movie/${film.id}`} 
                             key={film.id}
-                            className={classes.Link}
-                        >
+                            className={classes.Link}>
                             <FilmListItem
                                 title={film.title}
                                 year={film.year}
-                                poster={film.poster}
-                            />
+                                poster={film.poster}/>
                         </Link>
-                    )
-                })
-            }
-        </section>
-    )
+                    ))
+                }
+            </section>
+        )
+    }
+
+    if (props.loader) {
+        filmsArea = <Spinner />
+    }
+
+    if (props.notFound) {
+        filmsArea = <InfoMessage type="Warning">Films weren't found :( Please try again</InfoMessage>
+    }
+
+    return filmsArea;
 }
 
-export default filmsList;
+const mapStateToProps = state => {
+    return {
+        films: state.filmsData,
+        notFound: state.notFound,
+        loader: state.activeLoader
+    }
+}
+
+export default connect(mapStateToProps)(filmsList);

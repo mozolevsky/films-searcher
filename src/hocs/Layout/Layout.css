@@ -2,12 +2,6 @@
     .Container {
         margin: 80px 15px 30px 15px;
     }
-
-    .BackBtnWrapper {
-        position: absolute;
-        left: 10px;
-        top: 10px;
-    }
 }
 
 @media (min-width: 576px) {
