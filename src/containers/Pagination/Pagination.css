@@ -1,0 +1,36 @@
+.PaginationContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100vw;
+    padding: 10px;
+    background: #efebe9;;
+}
+
+.PaginationContainer button {
+    margin: 0 5px;
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: #6d4c41;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.PaginationContainer button:hover {
+    cursor: pointer;
+    background-color: #8d6e63;
+}
+
+.PaginationContainer > p {
+    margin: 0;
+    margin-top: 5px;
+    color: #795548
+}
