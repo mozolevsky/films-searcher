@@ -5,7 +5,6 @@ import classes from './Header.css';
 import backArrow from '../../images/left-arrow.svg';
 
 class Header extends PureComponent {
-
     backHandler = () => {
         this.props.history.goBack();
     }

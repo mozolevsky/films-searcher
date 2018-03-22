@@ -65,7 +65,7 @@ class Search extends PureComponent {
 
 const mapStateToProps = state => {
     return {
-        searchString: state.searchString
+        searchString: state.searchReducer.searchString
     }
 }
 

@@ -12,7 +12,6 @@ import FilmCard from '../../containers/FilmCard/FilmCard';
 import classes from './Layout.css';
 import staticData from '../../staticData';
 
-
 class Layout extends PureComponent {
     render() {
         return (
@@ -31,7 +30,5 @@ class Layout extends PureComponent {
         )
     }
 }
-
-
 
 export default withRouter(Layout);

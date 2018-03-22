@@ -1,10 +1,9 @@
-import * as actionCreators from './actions';
+import * as actionCreators from '../actions';
 
 const initialState = {
-    searchString: '',
     filmsData: [],
     notFound: false,
-    activeLoader: false,
+    currentPage: null,
     currentFilmData: {
         Title: '',
         Poster: '',
@@ -14,23 +13,20 @@ const initialState = {
         Year: '',
         Writer: ''
     }
-}
+};
 
-const reducer = (state = initialState, action) => {
+const filmsReducer = (state = initialState, action) => {
     switch(action.type) {
         case actionCreators.ADD_FILMS:
-            if (!action.filmsData) {
+            if (!action.filmsData.data) {
                 return {
                     ...state,
-                    currentFilmData: {
-                        ...state.currentFilmData
-                    },
                     filmsData: [],
                     notFound: true
                 }
             }
 
-            let newFilmsData = action.filmsData.map(film => {
+            let newFilmsData = action.filmsData.data.map(film => {
                 return {
                     year: film.Year,
                     poster: film.Poster,
@@ -41,19 +37,12 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
+                currentPage: action.filmsData.currentPage,
                 currentFilmData: {
                     ...state.currentFilmData
                 },
                 filmsData: newFilmsData,
                 notFound: false
-            }
-        case actionCreators.SWITCH_LOADER: 
-            return {
-                ...state,
-                currentFilmData: {
-                    ...state.currentFilmData
-                },
-                activeLoader: !state.activeLoader
             }
         case actionCreators.SET_CURRENT_FILM_DATA:
             return {
@@ -62,20 +51,9 @@ const reducer = (state = initialState, action) => {
                     ...action.currentFilmData
                 }
             }
-        case actionCreators.SET_SEARCH_STRING:
-            return {
-                ...state,
-                currentFilmData: {
-                    ...action.currentFilmData
-                },
-                searchString: action.searchString
-            }
         default:
             return state;
     }
 }
 
-export default reducer;
-
-
-
+export default filmsReducer;

@@ -36,7 +36,7 @@ const filmsList = props => {
     }
 
     if (props.notFound) {
-        filmsArea = <InfoMessage type="Warning">Films weren't found :( Please try again</InfoMessage>
+        filmsArea = <InfoMessage type="Warning">{staticData.emptyResults}</InfoMessage>
     }
 
     return filmsArea;
@@ -44,9 +44,9 @@ const filmsList = props => {
 
 const mapStateToProps = state => {
     return {
-        films: state.filmsData,
-        notFound: state.notFound,
-        loader: state.activeLoader
+        films: state.filmsReducer.filmsData,
+        notFound: state.filmsReducer.notFound,
+        loader: state.filmsReducer.activeLoader
     }
 }
 

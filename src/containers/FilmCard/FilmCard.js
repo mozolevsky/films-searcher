@@ -66,9 +66,9 @@ class FilmPage extends PureComponent {
 
 const mapStateToProps = state => {
     return {
-        filmId: state.currentFilmId,
-        loader: state.activeLoader,
-        filmDetails: state.currentFilmData
+        filmId: state.filmsReducer.currentFilmId,
+        loader: state.loaderReducer.activeLoader,
+        filmDetails: state.filmsReducer.currentFilmData
     }
 }
 

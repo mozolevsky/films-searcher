@@ -5,7 +5,10 @@ export const SET_SEARCH_STRING = 'SET_SEARCH_STRING';
 
 export const addFilms = data => ({
     type: ADD_FILMS,
-    filmsData: data
+    filmsData: {
+        data: data,
+        currentPage: 1
+    }
 });
 
 export const switchLoader = () => ({
